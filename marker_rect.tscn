@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://pnnspnfghgdo"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_idiof"]
+
+[node name="MarkerRect" type="CollisionShape2D"]
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(100, 100)
+texture = SubResource("CanvasTexture_idiof")

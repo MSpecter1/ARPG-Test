@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdkrvmfj20jo8"]
+
+[ext_resource type="Script" path="res://P10Boss.gd" id="1_ac7p1"]
+[ext_resource type="Texture2D" uid="uid://cithqitp030gr" path="res://art/playerGrey_up1.png" id="2_63xv1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_slot3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_63xv1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jcrbg"]
+radius = 166.0
+height = 426.0
+
+[node name="P10Boss" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_ac7p1")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_slot3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_jcrbg")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

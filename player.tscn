@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://nnhlotbcpy61"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_rrlta"]
+[ext_resource type="Texture2D" uid="uid://2cyf0gi80x76" path="res://art/knight3.png" id="2_pdeo6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pg4bv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pdeo6")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pdeo6")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfhev"]
+radius = 29.0
+height = 186.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_rrlta")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_pg4bv")
+animation = &"up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 50)
+shape = SubResource("CapsuleShape2D_xfhev")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
