@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw028ymmwwhqf"]
+
+[ext_resource type="Script" path="res://TestingGround/particle_explosion.gd" id="1_0ihjg"]
+
+[sub_resource type="Curve" id="Curve_5ql3g"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ehvnt"]
+curve = SubResource("Curve_5ql3g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i1q6b"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+initial_velocity_min = 70.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_ehvnt")
+
+[node name="HitParticle" type="GPUParticles2D"]
+emitting = false
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_i1q6b")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_0ihjg")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

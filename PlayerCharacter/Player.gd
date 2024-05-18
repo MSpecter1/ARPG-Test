@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var speed = 150
 @export var friction = 1 #0.1
 @export var acceleration = 1 #0.1
+var knockback : Vector2
+@export var knockback_resistance = 1
+@export var hit_particle: PackedScene
+var dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,10 +33,11 @@ func get_input():
 func _physics_process(delta):
 	var direction = get_input()
 	if direction.length() > 0:
-		velocity = velocity.lerp(direction.normalized() * speed, acceleration)
+		var move_vector = direction.normalized() * speed + knockback * knockback_resistance
+		velocity = velocity.lerp(move_vector, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
-		#$AnimatedSprite2D.animation = "idle"
+		velocity += knockback * knockback_resistance
 		$AnimatedSprite2D.play("idle")
 		
 	if velocity.x or velocity.y != 0:
@@ -40,3 +45,7 @@ func _physics_process(delta):
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	
 	move_and_slide()
+	knockback = lerp(knockback, Vector2.ZERO,0.1)
+
+func hit():
+	pass

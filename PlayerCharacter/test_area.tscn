@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c16x5cxhyfxqw"]
+
+[ext_resource type="Script" path="res://PlayerCharacter/TestArea.gd" id="1_m6dch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18od6"]
+
+[node name="TestArea" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_m6dch")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-10, -10)
+scale = Vector2(0.666667, 0.8)
+polygon = PackedVector2Array(0, 0, 30, 0, 30, 25, 0, 25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_18od6")
