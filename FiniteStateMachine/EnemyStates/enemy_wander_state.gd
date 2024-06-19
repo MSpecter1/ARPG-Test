@@ -3,7 +3,6 @@ extends State
 
 @export var actor: EnemyTemplate
 @export var animator: AnimatedSprite2D
-@export var vision_cast: RayCast2D
 @onready var enemy_chase_state = $"../EnemyChaseState"
 
 signal found_player

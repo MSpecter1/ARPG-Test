@@ -187,7 +187,7 @@ shape = SubResource("RectangleShape2D_qh12v")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_y22rp")
 sprite_frames = SubResource("SpriteFrames_ryarr")
-animation = &"dead"
+animation = &"idle"
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("5_sk31y")]
 animated_sprite = NodePath("../AnimatedSprite2D")

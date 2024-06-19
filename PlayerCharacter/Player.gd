@@ -1,21 +1,31 @@
 extends CharacterBody2D
+class_name Player
 
 @export var speed = 150
 @export var friction = 1 #0.1
 @export var acceleration = 1 #0.1
+
 var knockback : Vector2
 @export var knockback_resistance = 1
 @export var hit_particle: PackedScene
+
 var dead = false
+
+@onready var target_ray_cast = $TargetRayCast as RayCast2D
+@onready var fsm = $FiniteStateMachine as FiniteStateMachine
+@onready var animator = $AnimatedSprite2D as AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	fsm.init(self, animator)
 	pass # Replace with function body.
 
 
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#pass
+func _process(delta):
+	target_ray_cast.target_position = get_local_mouse_position()
+	knockback = lerp(knockback, Vector2.ZERO,0.1)
+	pass
 
 func get_input():
 	var input = Vector2()
@@ -31,21 +41,22 @@ func get_input():
 
 # Call 60 frames per second
 func _physics_process(delta):
-	var direction = get_input()
-	if direction.length() > 0:
-		var move_vector = direction.normalized() * speed + knockback * knockback_resistance
-		velocity = velocity.lerp(move_vector, acceleration)
-	else:
-		velocity = velocity.lerp(Vector2.ZERO, friction)
-		velocity += knockback * knockback_resistance
-		$AnimatedSprite2D.play("idle")
-		
-	if velocity.x or velocity.y != 0:
-		$AnimatedSprite2D.play("walk_right")
-		$AnimatedSprite2D.flip_h = velocity.x < 0
-	
-	move_and_slide()
-	knockback = lerp(knockback, Vector2.ZERO,0.1)
+	#var direction = get_input()
+	#if direction.length() > 0:
+		#var move_vector = direction.normalized() * speed + knockback * knockback_resistance
+		#velocity = velocity.lerp(move_vector, acceleration)
+	#else:
+		#velocity = velocity.lerp(Vector2.ZERO, friction)
+		#velocity += knockback * knockback_resistance
+		#$AnimatedSprite2D.play("idle")
+		#
+	#if velocity.x or velocity.y != 0:
+		#$AnimatedSprite2D.play("walk_right")
+		#$AnimatedSprite2D.flip_h = velocity.x < 0
+	#
+	#move_and_slide()
+	#knockback = lerp(knockback, Vector2.ZERO,0.1)
+	pass
 
 func hit():
 	pass

@@ -9,6 +9,7 @@ func init(parent, animator: AnimatedSprite2D) -> void:
 	for child in get_children():
 		child.actor = parent
 		child.animator = animator
+		child.set_physics_process(false)	
 	# Initialize to the default state
 	change_state(state)
 
@@ -18,6 +19,7 @@ func init(parent, animator: AnimatedSprite2D) -> void:
 	#pass # Replace with function body.
 
 func change_state(new_state: State):
+	#print(actor, " changes to ",new_state)
 	if state is State:
 		state.exit()
 	state = new_state
